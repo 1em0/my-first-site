@@ -1,122 +1,275 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="no-js" data-theme="night" data-hour="none">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="1em0 的个人主页">
-  <meta name="color-scheme" content="light dark">
-  <title>1em0 · 个人主页</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="1em0 的个人主页 · 窗内夜雨">
+<title>1em0 · 雨夜</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3c5 8 10 13 10 19a10 10 0 0 1-20 0c0-6 5-11 10-19z' fill='%23E8B86D'/%3E%3Ccircle cx='12.5' cy='19' r='2.2' fill='%23F6D28F'/%3E%3C/svg%3E">
+<script>(function(){var t;try{t=localStorage.getItem('1em0-theme')}catch(e){}if(t!=='night'&&t!=='day'){t=matchMedia('(prefers-color-scheme: light)').matches?'day':'night'}document.documentElement.setAttribute('data-theme',t);document.documentElement.className='js'})();</script>
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header class="site-header">
-    <nav class="nav" aria-label="主导航">
-      <a class="nav-brand" href="#top">1em0</a>
-      <ul class="nav-links">
-        <li><a href="#about">关于我</a></li>
-        <li><a href="#interests">兴趣</a></li>
-        <li><a href="#contact">联系</a></li>
+<body data-scene="hero">
+
+<a class="skip" href="#about">跳到内容</a>
+
+<header class="site-head">
+  <a class="wordmark" href="#top">1em0</a>
+  <div class="controls">
+    <!-- 设计文案，非个人信息 -->
+    <button class="ctl" id="btn-audio" type="button" aria-pressed="false" aria-label="开启雨声">
+      <svg class="ico ico-audio" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+        <path class="spk" d="M4 9.5v5h3.5l5 4v-13l-5 4z"/>
+        <path class="wave w1" d="M15.5 9.6a3.6 3.6 0 0 1 0 4.8"/>
+        <path class="wave w2" d="M18 7.2a7 7 0 0 1 0 9.6"/>
+        <path class="slash" d="M4 4l16 16"/>
+      </svg>
+      <span class="ctl-label">听雨</span>
+      <span class="ctl-dot" aria-hidden="true"></span>
+    </button>
+    <!-- 设计文案，非个人信息 -->
+    <button class="ctl" id="btn-theme" type="button" aria-label="切换到阴雨白昼">
+      <svg class="ico ico-umbrella" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+        <path class="ferrule" d="M12 1.5v2"/>
+        <path class="handle" d="M12 3.5v15.5a2.2 2.2 0 0 1-4.4 0"/>
+        <g class="canopy">
+          <path class="cloth" d="M2.8 12.4a9.2 9.2 0 0 1 18.4 0z"/>
+          <path class="rib" d="M12 3.6 5.4 12.4"/>
+          <path class="rib" d="M12 3.6 9.6 12.4"/>
+          <path class="rib" d="M12 3.6l2.4 8.8"/>
+          <path class="rib" d="M12 3.6l6.6 8.8"/>
+        </g>
+      </svg>
+      <span class="ctl-label"><span class="lbl-night">撑伞</span><span class="lbl-day">收伞</span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="name">
+    <div class="sky" aria-hidden="true"></div>
+    <div class="sky-lamp" aria-hidden="true"></div>
+    <canvas id="city" aria-hidden="true"></canvas>
+    <canvas id="pane" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="sky-flash" aria-hidden="true"></div>
+    <div class="frame" aria-hidden="true"></div>
+    <div class="hero-lamp" aria-hidden="true"></div>
+
+    <div class="hero-text">
+      <h1 id="name">1em0</h1>
+      <!-- 占位：替换这里 -->
+      <p class="tagline">这里是一句话介绍的占位文字，之后替换。</p>
+    </div>
+
+    <!-- 下面这行由 script.js 生成（时间 + 短句），不是个人信息，不需要替换 -->
+    <p class="verse-clock"><span class="clock-time">--:--</span><span class="clock-sep"> · </span><span class="clock-line">雨还在下</span></p>
+
+    <!-- 设计文案，非个人信息 -->
+    <a class="cue" href="#about">
+      <span class="cue-line" aria-hidden="true"><span class="cue-drop"></span></span>
+      <span class="cue-text">往下看</span>
+    </a>
+    <!-- 设计文案，非个人信息 -->
+    <p class="hint" aria-hidden="true">在玻璃上擦一擦</p>
+  </section>
+
+  <section class="sect sect-about" id="about" aria-labelledby="about-title">
+    <div class="container about-grid">
+      <div class="sect-head reveal" style="--i:0">
+        <p class="num">〇一</p>
+        <h2 id="about-title">关于我</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="panel panel-about reveal" style="--i:1">
+        <!-- 占位：替换这里 -->
+        <p>这里是关于我的占位文字，之后替换。可以写你的背景、正在做的事、以及为什么做这个主页。</p>
+        <!-- 占位：替换这里 -->
+        <p>这是第二段关于我的占位文字，之后替换。长短随意，页面会自动适应。</p>
+        <!-- 占位：替换这里 -->
+        <p class="verse">一句占位的短句，之后替换。</p>
+        <svg class="deco-pane" viewBox="0 0 56 56" width="56" height="56" aria-hidden="true" focusable="false">
+          <rect x="6.5" y="6.5" width="43" height="43" rx="1"/>
+          <path d="M28 6.5v43M6.5 28h43"/>
+          <path d="M38 31.5c2.6 3.8 4.6 6.4 4.6 8.8a4.6 4.6 0 0 1-9.2 0c0-2.4 2-5 4.6-8.8z"/>
+          <circle cx="36.4" cy="39.2" r=".9"/>
+        </svg>
+        <span class="sheen" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect sect-interests" id="interests" aria-labelledby="interests-title">
+    <div class="container">
+      <div class="sect-head reveal" style="--i:0">
+        <p class="num">〇二</p>
+        <h2 id="interests-title">我的兴趣</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="panel grid">
+        <article class="cell reveal" style="--i:1" tabindex="0">
+          <p class="cell-num">〇一</p>
+          <svg class="cell-ico" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+            <path d="M20 5v3"/>
+            <path d="M6 22c2-9 8-14 14-14s12 5 14 14z"/>
+            <path d="M20 8 11 22M20 8l9 14"/>
+            <path d="M20 22v10a3 3 0 0 1-6 0"/>
+          </svg>
+          <!-- 占位：替换这里 -->
+          <h3>兴趣占位 一</h3>
+          <!-- 占位：替换这里 -->
+          <p>这里是兴趣描述的占位文字，之后替换。</p>
+          <span class="cell-drop" aria-hidden="true"></span>
+          <span class="sheen" aria-hidden="true"></span>
+        </article>
+        <article class="cell reveal" style="--i:2" tabindex="0">
+          <p class="cell-num">〇二</p>
+          <svg class="cell-ico" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+            <path d="M9 25v-5a11 11 0 0 1 22 0v5"/>
+            <rect x="7" y="23" width="5" height="10" rx="1"/>
+            <rect x="28" y="23" width="5" height="10" rx="1"/>
+          </svg>
+          <!-- 占位：替换这里 -->
+          <h3>兴趣占位 二</h3>
+          <!-- 占位：替换这里 -->
+          <p>这里是兴趣描述的占位文字，之后替换。</p>
+          <span class="cell-drop" aria-hidden="true"></span>
+          <span class="sheen" aria-hidden="true"></span>
+        </article>
+        <article class="cell reveal" style="--i:3" tabindex="0">
+          <p class="cell-num">〇三</p>
+          <svg class="cell-ico" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+            <path d="M20 12c-4-3-9-3-13-2v20c4-1 9-1 13 2 4-3 9-3 13-2V10c-4-1-9-1-13 2z"/>
+            <path d="M20 12v20"/>
+          </svg>
+          <!-- 占位：替换这里 -->
+          <h3>兴趣占位 三</h3>
+          <!-- 占位：替换这里 -->
+          <p>这里是兴趣描述的占位文字，之后替换。</p>
+          <span class="cell-drop" aria-hidden="true"></span>
+          <span class="sheen" aria-hidden="true"></span>
+        </article>
+        <article class="cell reveal" style="--i:4" tabindex="0">
+          <p class="cell-num">〇四</p>
+          <svg class="cell-ico" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+            <path d="M9 16h20v8a7 7 0 0 1-7 7h-6a7 7 0 0 1-7-7z"/>
+            <path d="M29 19h2.5a3.5 3.5 0 0 1 0 7H29"/>
+            <path d="M16 12c0-2 2-2 2-4M22 12c0-2 2-2 2-4"/>
+            <path d="M8 34h24"/>
+          </svg>
+          <!-- 占位：替换这里 -->
+          <h3>兴趣占位 四</h3>
+          <!-- 占位：替换这里 -->
+          <p>这里是兴趣描述的占位文字，之后替换。</p>
+          <span class="cell-drop" aria-hidden="true"></span>
+          <span class="sheen" aria-hidden="true"></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect sect-contact" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="sect-head sect-head-center reveal" style="--i:0">
+        <p class="num">〇三</p>
+        <h2 id="contact-title">联系方式</h2>
+        <span class="rule" aria-hidden="true"></span>
+        <!-- 设计文案，非个人信息 -->
+        <p class="verse contact-verse">天快亮之前，还能找到我。</p>
+      </div>
+      <!-- 占位：下面四个链接的 href="#" 请替换成你自己的地址（邮箱可用 mailto:） -->
+      <ul class="lamps">
+        <li class="reveal" style="--i:1">
+          <a class="lamp" href="#">
+            <svg class="lamp-svg" viewBox="0 0 48 80" width="48" height="80" aria-hidden="true" focusable="false">
+              <path class="lamp-hood" d="M11 19h26l-5-7H16z"/>
+              <circle class="lamp-bulb" cx="24" cy="28" r="9"/>
+              <path class="lamp-stem" d="M24 37v39"/>
+              <path class="lamp-base" d="M15 76h18"/>
+            </svg>
+            <span class="lamp-label">GitHub</span>
+            <!-- 占位：替换这里 -->
+            <span class="lamp-sub">链接占位</span>
+          </a>
+          <span class="lamp-mirror" aria-hidden="true"></span>
+        </li>
+        <li class="reveal" style="--i:2">
+          <a class="lamp" href="#">
+            <svg class="lamp-svg" viewBox="0 0 48 80" width="48" height="80" aria-hidden="true" focusable="false">
+              <path class="lamp-hood" d="M11 19h26l-5-7H16z"/>
+              <circle class="lamp-bulb" cx="24" cy="28" r="9"/>
+              <path class="lamp-stem" d="M24 37v39"/>
+              <path class="lamp-base" d="M15 76h18"/>
+            </svg>
+            <span class="lamp-label">邮箱</span>
+            <!-- 占位：替换这里 -->
+            <span class="lamp-sub">链接占位</span>
+          </a>
+          <span class="lamp-mirror" aria-hidden="true"></span>
+        </li>
+        <li class="reveal" style="--i:3">
+          <a class="lamp" href="#">
+            <svg class="lamp-svg" viewBox="0 0 48 80" width="48" height="80" aria-hidden="true" focusable="false">
+              <path class="lamp-hood" d="M11 19h26l-5-7H16z"/>
+              <circle class="lamp-bulb" cx="24" cy="28" r="9"/>
+              <path class="lamp-stem" d="M24 37v39"/>
+              <path class="lamp-base" d="M15 76h18"/>
+            </svg>
+            <span class="lamp-label">博客</span>
+            <!-- 占位：替换这里 -->
+            <span class="lamp-sub">链接占位</span>
+          </a>
+          <span class="lamp-mirror" aria-hidden="true"></span>
+        </li>
+        <li class="reveal" style="--i:4">
+          <a class="lamp" href="#">
+            <svg class="lamp-svg" viewBox="0 0 48 80" width="48" height="80" aria-hidden="true" focusable="false">
+              <path class="lamp-hood" d="M11 19h26l-5-7H16z"/>
+              <circle class="lamp-bulb" cx="24" cy="28" r="9"/>
+              <path class="lamp-stem" d="M24 37v39"/>
+              <path class="lamp-base" d="M15 76h18"/>
+            </svg>
+            <span class="lamp-label">社交</span>
+            <!-- 占位：替换这里 -->
+            <span class="lamp-sub">链接占位</span>
+          </a>
+          <span class="lamp-mirror" aria-hidden="true"></span>
+        </li>
       </ul>
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换深色/浅色模式">
-        <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
-        <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
-      </button>
-    </nav>
-  </header>
+    </div>
+  </section>
 
-  <main id="top">
-    <!-- 顶部：名字 + 一句话简介 -->
-    <section class="hero">
-      <div class="avatar" aria-hidden="true">1</div>
-      <h1 class="hero-name">1em0</h1>
-      <p class="hero-tagline">这里是一句话简介占位文字，用来介绍你是谁、在做什么。</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#contact">联系我</a>
-        <a class="btn btn-ghost" href="#about">了解更多</a>
-      </div>
-    </section>
+</main>
 
-    <!-- 关于我 -->
-    <section class="section" id="about">
-      <h2 class="section-title">关于我</h2>
-      <div class="card">
-        <p>
-          这里是「关于我」的占位文字。你可以在这里介绍自己的背景、正在学习或从事的方向、
-          以及你为什么会建立这个主页。
-        </p>
-        <p>
-          第二段占位文字：写一些你觉得有趣的经历、正在做的项目，或者你对未来的期望。
-          文字可以随意调整长短，页面会自动适应。
-        </p>
-      </div>
-    </section>
+<footer class="dawn">
+  <div class="window-strip" aria-hidden="true">
+    <span class="last-drop d1"></span>
+    <span class="last-drop d2"></span>
+    <span class="last-drop d3"></span>
+  </div>
+  <div class="sill">
+    <p class="mirror" aria-hidden="true">1em0</p>
+  </div>
+  <div class="container dawn-body">
+    <!-- 设计文案，非个人信息 -->
+    <p class="verse dawn-verse"><span class="lbl-night">雨停了。天快亮了。</span><span class="lbl-day">雨停了。云还没散。</span></p>
+    <!-- 下面这行由 script.js 生成（时间 + 短句），不是个人信息，不需要替换 -->
+    <p class="verse-clock-2"><span class="clock-time">--:--</span><span class="clock-sep"> · </span><span class="clock-line">雨还在下</span></p>
+    <div class="colophon-row">
+      <!-- 占位：替换这里 -->
+      <small class="colophon">© 1em0 · 页脚占位文字</small>
+      <!-- 设计文案，非个人信息 -->
+      <a class="top" href="#top">回到窗前</a>
+    </div>
+  </div>
+</footer>
 
-    <!-- 我的兴趣 -->
-    <section class="section" id="interests">
-      <h2 class="section-title">我的兴趣</h2>
-      <ul class="grid">
-        <li class="card interest">
-          <span class="interest-icon" aria-hidden="true">💻</span>
-          <h3>兴趣一</h3>
-          <p>占位描述：用一两句话说说这个兴趣，比如你喜欢它的原因。</p>
-        </li>
-        <li class="card interest">
-          <span class="interest-icon" aria-hidden="true">📚</span>
-          <h3>兴趣二</h3>
-          <p>占位描述：用一两句话说说这个兴趣，比如你最近在看什么。</p>
-        </li>
-        <li class="card interest">
-          <span class="interest-icon" aria-hidden="true">🎵</span>
-          <h3>兴趣三</h3>
-          <p>占位描述：用一两句话说说这个兴趣，比如你常听的风格。</p>
-        </li>
-        <li class="card interest">
-          <span class="interest-icon" aria-hidden="true">🌍</span>
-          <h3>兴趣四</h3>
-          <p>占位描述：用一两句话说说这个兴趣，比如你去过或想去的地方。</p>
-        </li>
-      </ul>
-    </section>
+<div class="veil" aria-hidden="true"></div>
 
-    <!-- 联系方式和链接 -->
-    <section class="section" id="contact">
-      <h2 class="section-title">联系方式</h2>
-      <div class="card">
-        <p>欢迎通过以下方式找到我（以下均为占位链接，记得替换）：</p>
-        <ul class="links">
-          <li>
-            <a href="https://github.com/1em0" target="_blank" rel="noopener noreferrer">
-              <span class="link-label">GitHub</span>
-              <span class="link-value">github.com/1em0</span>
-            </a>
-          </li>
-          <li>
-            <a href="mailto:you@example.com">
-              <span class="link-label">邮箱</span>
-              <span class="link-value">you@example.com</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://example.com" target="_blank" rel="noopener noreferrer">
-              <span class="link-label">博客</span>
-              <span class="link-value">example.com</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/your_handle" target="_blank" rel="noopener noreferrer">
-              <span class="link-label">Twitter / X</span>
-              <span class="link-value">@your_handle</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>© <span id="year"></span> 1em0 · 用纯 HTML / CSS / JS 构建</p>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="rain.js"></script>
+<script src="audio.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
